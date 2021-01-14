@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>    
+
+        <title>
+            {{ .Title }}
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.18/default/snipcart.css" />
+        <link rel="stylesheet" href="{{ (resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "assets/css/main.css" . | resources.ToCSS (dict "outputStyle" "nested" "precision" 10)).Permalink }}">
+        <link rel="icon" type="image/png" href="{{ .Site.Params.favicon | relURL }}">
+        
+    </head>
+    <body class="{{ .Params.layout }}-template">
+        
+        <div class="site-wrapper">
+                {{ $include_dict := dict "page" . "Site" .Site }}
+                {{ partial "header.html" $include_dict }}
+        
+                {{ block "content" . }}{{ end }}
+        
+                {{ $include_dict = dict "page" . "Site" .Site }}
+                {{ partial "footer.html" $include_dict }}
+            </div>
+            <div style="display: none" id="template-params" data-api-key="{{ .Site.Params.snipcart_api_key }}" data-templates-url="{{ "js/snipcart-templates.vue" | relURL }}"></div>
+        <script src="{{ "js/lib/modernizr.js" | relURL }}"></script>
+        <script src="{{ "js/main.js" | relURL }}"></script>
+        <script src="{{ "js/page_load.js" | relURL }}"></script>
+    </body> 
+</html>

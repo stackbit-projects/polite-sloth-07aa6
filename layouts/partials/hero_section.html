@@ -1,0 +1,24 @@
+{{ $section := .section }}
+{{ $bg_img_opacity_pct := $section.background_image_opacity | default 100 }}
+{{ $bg_img_opacity := mul $bg_img_opacity_pct 0.01 }}
+
+  <section class="hero bg-color" data-id="{{ $section.section_id }}">
+
+    {{ if $section.background_image }}
+      <div class="hero__img" style="background-image: url('{{ $section.background_image | relURL }}'); opacity: {{ $bg_img_opacity }};"></div>
+    {{ end }}
+    <div class="hero__title">{{ partial "markdownify-block" $section.content }}</div>
+
+    <div class="link-group">
+      {{ range $action := $section.actions }}
+        {{ $action_style := $action.style | default "primary" }}
+        <a href="{{ $action.url | relURL }}" class="link{{ if eq $action_style "primary" }} link--filled{{ end }}{{ if eq $action_style "secondary" }} link--transparent{{ end }}{{ if eq $action_style "link" }} link--simple {{ end }}">
+          {{ $action.title }}
+          {{ if $action.arrow }}
+          <svg width="26" height="14" viewBox="0 0 26 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.6819 6.07886H0V7.79048H22.8139L18.2402 12.3182L19.434 13.5L26 7L19.434 0.5L18.2402 1.68182L22.6819 6.07886Z" fill="currentColor"/></svg>
+          {{ end }}
+        </a>
+      {{ end }}
+    </div>
+
+  </section>

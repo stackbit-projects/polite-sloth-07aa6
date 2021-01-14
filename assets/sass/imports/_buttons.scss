@@ -1,0 +1,89 @@
+.button {
+  font-family: $font_family_primairy;
+  width: fit-content;
+  font-weight: bold;
+  font-size: $font_size_medium;
+  border: none;
+  background-color: $color_default;
+  color: $color_active;
+  padding: 0.5em;
+  margin: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color .2s, background-color .2s;
+
+  svg path {
+    color: inherit;
+    fill: currentColor;
+  }
+
+  &:hover {
+    background-color: $color_active;
+    color: $color_default;
+  }
+
+  &:active {
+    background-color: $color_active_medium;
+    color: $color_default;
+    outline: none;
+  }
+
+  &__icon {
+    padding: 0 0.5em;
+  }
+  &__text {
+    padding: 0 0.5em;
+  }
+
+  &--icon-only {
+    width: $spacing--unit * 6;
+    height: $spacing--unit * 6;
+  }
+
+  &--transparent {
+    background-color: transparent;
+    &:hover,
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  &--std {
+    background-color: $color_active;
+    color: $color_default;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+    &:hover {
+      background-color: $color_active_medium;
+    }
+    &:active {
+      background-color: $color_active_dark;
+    }
+  }
+
+  &--large-icon {
+    padding-left: $spacing--unit*3;
+    padding-right: $spacing--unit*3;
+  }
+
+  &--large-icon & {
+    &__text {
+        margin-left: $spacing--unit*2;
+    }
+
+    &__icon {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__icon svg {
+        height: $spacing--unit*3;
+        width: $spacing--unit*3;
+    }
+  }
+}
